@@ -1,4 +1,4 @@
-VisualSampler v1.0.1 FREE
+VisualSampler v2.0.0 FREE
 for SP-404MK2
 ============================================================
 
@@ -32,7 +32,7 @@ Note: This release is exclusively for Macs with Apple Silicon. Intel Macs and Wi
 2. Connect the SP-404MKII to your Mac via USB and turn it on.
 3. Check the SP-404MKII MIDI settings (see below).
 4. Launch VisualSampler.app.
-5. Press the SP-404MKII PADs to switch images.
+5. Press a pad on the SP-404MKII to leave the startup screen and display or switch images.
 
 Required MIDI settings on the SP-404MKII:
   SHIFT + PAD 13（UTILITY）→ SYSTEM → MIDI
@@ -48,14 +48,15 @@ Note: VisualSampler does not require a specific setting for
 
 Keeping Banks alongside VisualSampler.app makes the layout easy to understand.
 If asked to locate Banks at startup, select the parent “Banks” folder containing BankA and BankB.
-The selected location is saved and used on subsequent launches.
+A valid Banks folder alongside the app takes priority. If it is unavailable, version 2 checks its saved location.
+The chosen location is saved separately from version 1 and used on subsequent launches.
 If the saved location is no longer available, the folder picker appears again.
 After cancelling or choosing the wrong folder, press R in the app to try again.
 Banks/BankA and Banks/BankB must each contain images numbered 01–16.
 
 Example of the correct folder structure:
 
-VisualSampler_v1.0.1_macOS_AppleSilicon/
+VisualSampler_v2.0.0_macOS_AppleSilicon/
 ├── VisualSampler.app
 ├── Banks/
 │   ├── BankA/
@@ -103,11 +104,11 @@ https://support.apple.com/ja-jp/102445
 
 【4. About BANKs】
 
-VisualSampler v1.0.1 FREE supports only BANK A and BANK B.
+VisualSampler v2.0.0 FREE supports only BANK A and BANK B.
 You can assign 16 images to each BANK, for a total of up to 32 images.
 
-BANK A: 16 photos of everyday scenes in Tokyo (included by default)
-BANK B: 16 two-color manga-style images based on the BANK A photos (included by default)
+BANK A: 16 included images (3 HEIC + 13 JPG)
+BANK B: 16 included images (PNG)
 
 Images placed in BANK C or later BANKs will not load or display in the FREE version.
 A future VisualSampler PRO version is planned to support more BANKs.
@@ -124,6 +125,11 @@ Supported image formats:
   .jpg   (priority 1)
   .jpeg  (priority 2)
   .png   (priority 3)
+  .heic  (priority 4)
+  .heif  (priority 5)
+
+HEIC/HEIF images are loaded with their shooting orientation applied. Original files are not modified.
+Video files and the video portion of Live Photos are not supported.
 
 File extensions are case-insensitive.
 
@@ -135,7 +141,7 @@ File naming rules:
   such as “01tokyo.jpg”, are not recognized.
 
 Priority when multiple files match the same PAD number:
-  1. Extension: .jpg → .jpeg → .png
+  1. Extension: .jpg → .jpeg → .png → .heic → .heif
   2. With the same extension, the shorter filename excluding the extension
   3. With the same length, alphabetical filename order (case-insensitive)
 
@@ -144,30 +150,46 @@ Example: If 01.jpg / 01_city.jpg / 01_tokyo.png are present,
 
 To avoid confusion, one image file per PAD number is recommended.
 
-【6. Recommended Image Aspect Ratio and File Size】
+【6. Aspect Ratios and Recommended Image Sizes】
 
-The app's reference window size is 768 × 1024 px (width:height = 3:4).
-If preparing images to match the screen ratio, use a portrait 3:4 ratio as a guide.
+The initial aspect ratio is 3:4. Left-click the image to cycle through:
+  3:4 → 4:3 → 9:16 → 16:9 → 3:4
 
-Suggested sizes: approximately 768 × 1024 px or 1536 × 2048 px.
-Note: These are guidelines for preparing images, not requirements.
-Note: Cropping, margins, and distortion may appear differently depending
-  on the image display method. Check the actual display.
+Internal rendering dimensions:
+  3:4  : 768 × 1024 px
+  4:3  : 1024 × 768 px
+  9:16 : 576 × 1024 px
+  16:9 : 1024 × 576 px
 
-Larger image files or higher resolutions may increase the time needed
-to load BANK images at startup.
-If the transition from the startup screen to the main screen takes a long
-time, resize or compress the images to an appropriate size.
+Images retain their original proportions and fill the selected aspect ratio.
+Any overflow is cropped around the center.
+If the window and the visual output have different proportions, black borders fill the unused area.
 
-【7. Changing Window Size with the Mac Keyboard】
+When you change the aspect ratio, a green Japanese label such as “アスペクト比 4:3”
+appears in the upper-right corner of the image and disappears after about two seconds.
+The same controls and label are available in fullscreen mode.
 
-Shift + 1 ：384 × 512 px（50%）
-Shift + 2 ：576 × 768 px（75%）
-Shift + 3 ：768 × 1024 px（100%）
+Prepare images in the aspect ratio you plan to use for more predictable framing.
+Examples: 768 × 1024 px for 3:4, 1024 × 576 px for 16:9, or integer multiples of these sizes.
+These are guidelines, not mandatory dimensions.
 
-Note: These shortcuts change the app's window size,
-  not the size of the image files themselves.
-Note: Behavior may vary depending on keyboard layout and input settings.
+Large images and many HEIC/HEIF files can take longer to preload at startup.
+If startup or operation is slow, reduce image resolution and try again.
+
+【7. Window and Fullscreen Display】
+
+Version 2 uses a single display window from startup.
+You do not need to right-click to open a separate presentation window.
+
+• Drag a window edge or corner to adjust its display size.
+• Use the green button in the upper-left corner to enter macOS fullscreen mode.
+  Depending on your macOS version, choose “Enter Full Screen” from its menu.
+• To leave fullscreen mode, move the pointer to the top of the screen and use the green button.
+• Left-click to cycle through the four aspect ratios in either windowed or fullscreen mode.
+• Use the red button to quit the app.
+
+Changing the window size preserves the selected visual aspect ratio.
+It does not stretch or distort the image to match the entire window.
 
 【8. Visual Effects】
 
@@ -204,6 +226,15 @@ If you cannot operate the app with the SP-404MKII:
 ・Check “PAD Note Out：ON” on the same screen.
 ・Restart the app and check again.
 
+If another image appears instead of HEIC:
+• JPG/JPEG/PNG files with the same pad number take priority.
+• To use HEIC, move other image formats with that number outside Banks.
+
+If the aspect ratio or framing is unexpected:
+• Left-click to select the desired aspect ratio.
+• Images that do not match that format are cropped around the center.
+• Black borders caused by a different window shape are normal.
+
 【10. Usage Notes and Trademarks】
 
 VisualSampler is independently created software.
@@ -220,7 +251,7 @@ Roland and SP-404MKII are trademarks or registered trademarks of Roland Corporat
 
 【11. Credits / Creator Information】
 
-VisualSampler v1.0.1 FREE
+VisualSampler v2.0.0 FREE
 Created by：achamania
 Concept / Design / Development：achamania
 
@@ -252,14 +283,30 @@ YouTube：https://www.youtube.com/@achamania
 
 Sample Your City. Remix Your Reality.
 
-【v1.0.1 changes and verification】
-・Fixed external Banks lookup when macOS runs a downloaded app in isolation (App Translocation).
-・Added Banks folder selection, saved locations, and reselection.
-・Updated the app icon.
-・Java is bundled; installing Processing or an additional Java runtime is normally unnecessary.
+【Changes in v2.0.0】
 
-On October 15, 2026, on the Apple Silicon Mac used for development, we verified downloading
-from GitHub, macOS launch approval, Banks loading and recovery, and physical MIDI/BANK/FX/CTRL operation.
-All 32 images and PAD processing were also checked with automated tests.
-Other Macs, extended operation, and every combination of parameters have not been tested.
-The existing startup screen displays Ver. 1.00, but this package is v1.0.1.
+• Added HEIC/HEIF still-image support alongside JPG/JPEG/PNG.
+• Automatically applies HEIC/HEIF photo orientation.
+• Left-click to switch between 3:4, 4:3, 9:16 and 16:9.
+• Added a green, TV-style aspect ratio label in the upper-right corner.
+• Unified the display into one window, with macOS fullscreen via the green button.
+• Preserves the output aspect ratio when resizing, with black borders in unused areas.
+• Stores Banks preferences separately from version 1 and prioritizes Banks alongside the app.
+• Updated the startup screen to “Ver. 2.0.0”.
+• Updated the included BANK A/B images; BANK A includes three HEIC photos.
+• Retains BANK A/B operation, pad control and the four effects from version 1.
+• Video support, new effects and Windows support are not included in this release.
+
+The startup screen, window title, README and app information all use version number 2.0.0.
+
+【Verification Status】
+
+During development, HEIC display and orientation, four aspect ratios and effects were checked on the development Mac.
+The single-window implementation was tested using a test copy for window count, rendering after startup,
+four aspect ratios, effects, and entering and leaving macOS fullscreen mode.
+
+On 2026-10-21, the release candidate was checked for app startup, bundled Java, code-signature validation,
+loading all 32 images and detection of the SP-404MKII MIDI ports. Tests using the bundled Java also checked
+HEIC loading and orientation, four aspect ratios, effects, a single window and fullscreen round trips.
+A hands-on test of the downloaded build is planned before publication.
+Other Macs, Windows, prolonged operation and every combination of parameter settings have not been tested.
